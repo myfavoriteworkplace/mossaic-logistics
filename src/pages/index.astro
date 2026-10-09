@@ -1,0 +1,439 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import servicesData from '../content/services.json';
+import ratesData from '../content/rates.json';
+import shipmentsData from '../content/shipments.json';
+import { ratesSchema, servicesSchema, shipmentsSchema } from '../content/schema';
+
+const services = servicesSchema.parse(servicesData);
+const rates = ratesSchema.parse(ratesData);
+const shipments = shipmentsSchema.parse(shipmentsData);
+---
+<BaseLayout>
+  <SiteHeader />
+    <main id="top" data-shipments={JSON.stringify(shipments)} data-rates={JSON.stringify(rates)}>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-grid grid-overlay"></div>
+      <div class="shell hero-layout">
+        <div class="hero-copy">
+          <div class="hero-label"><span class="label-pip" aria-hidden="true"></span><span>Freight coordination, in focus</span></div>
+          <h1 id="hero-title">Move goods.<br />Lose the <em>guesswork.</em></h1>
+          <p class="hero-lede">Air, ocean, and rail freight, made easier to see and simpler to plan. One connected view from first handoff to final mile.</p>
+          <div class="hero-cta">
+            <a class="btn button-primary focus-ring" href="#estimator">Plan a shipment <span aria-hidden="true">↗</span></a>
+            <a class="btn button-quiet focus-ring" href="#services">Explore capabilities <span aria-hidden="true">↓</span></a>
+          </div>
+          <p class="hero-fineprint">ONE COORDINATED VIEW · MULTIPLE WAYS TO MOVE</p>
+          <div class="track-band" id="tracking">
+            <section class="track-card glass" aria-labelledby="track-title">
+              <div class="track-heading">
+                <strong id="track-title">Shipment lookup</strong>
+                <span>Local demonstration</span>
+              </div>
+              <form class="track-form" id="track-form">
+                <label class="sr-only" for="tracking-id">Demo shipment ID</label>
+                <input id="tracking-id" name="tracking-id" type="text" placeholder="Enter a demo shipment ID" autocomplete="off" aria-describedby="tracking-hint" />
+                <button class="button-primary focus-ring" type="submit">Look up <span aria-hidden="true">→</span></button>
+              </form>
+              <div class="sample-ids" id="tracking-hint">
+                <span>TRY A SAMPLE:</span>
+                {shipments.map((shipment) => <button class="sample-id" type="button" data-id={shipment.id}>{shipment.id}</button>)}
+              </div>
+              <div class="track-result" id="track-result" role="status" aria-live="polite"></div>
+            </section>
+          </div>
+        </div>
+        <div class="hero-art">
+          <div class="map-card glass" aria-label="Illustrative route map from Singapore to Rotterdam">
+            <svg class="map-svg" viewBox="0 0 640 430" role="img" aria-labelledby="hero-map-title hero-map-desc" preserveAspectRatio="xMidYMid slice">
+              <title id="hero-map-title">Illustrative global freight route</title>
+              <desc id="hero-map-desc">A decorative map showing a sample connection between Southeast Asia and Northern Europe. Not live tracking.</desc>
+              <defs>
+                <pattern id="map-grid" width="42" height="42" patternUnits="userSpaceOnUse"><path d="M42 0H0v42" fill="none" stroke="#56706c" stroke-opacity=".19" stroke-width=".7"/></pattern>
+                <radialGradient id="map-glow"><stop stop-color="#27c9b2" stop-opacity=".2"/><stop offset="1" stop-color="#27c9b2" stop-opacity="0"/></radialGradient>
+                <linearGradient id="hero-route" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#c8ff59"/><stop offset="1" stop-color="#5ce1d0"/></linearGradient>
+              </defs>
+              <rect width="640" height="430" fill="#0b191c"/>
+              <rect width="640" height="430" fill="url(#map-grid)"/>
+              <ellipse cx="393" cy="184" rx="247" ry="188" fill="url(#map-glow)"/>
+              <g fill="#45605d" fill-opacity=".35" stroke="#6a8980" stroke-opacity=".22" stroke-width="1">
+                <path d="m60 101 25-31 38-8 22 12 8 23-18 11-5 25-19 15-4 28-18 23-24-8-10-32-19-23 12-22-10-13Z"/>
+                <path d="m154 211 25 8 12 22-11 26 9 28-13 26-3 36-16 22-13-23 3-31-13-25 4-26-10-28 11-23Z"/>
+                <path d="m274 92 23-19 49 8 19 15 36-5 31 13 38-1 36 24-13 18-32-6-19 13-29-7-17 18-28-5-18 18-19-7-23 20-22-13-24 13-17-10 9-22 21-10-3-25 18-13-8-21-27-4Z"/>
+                <path d="m331 191 26-11 28 16 10 30-12 28 7 38-17 44-21 21-13-22-15-11 2-32-12-22 6-28-10-26 21-25Z"/>
+                <path d="m475 290 33-17 45 4 31 20-9 19-43 3-23 16-35-12-11-18 12-15Z"/>
+                <path d="m548 109 19-12 23 8 11 15-19 15-20-7-14-19Z"/>
+              </g>
+              <g fill="none" stroke="#5ce1d0" stroke-opacity=".17" stroke-width=".7">
+                <path d="M0 143c150 29 339 30 640-3M0 247c180-39 395-41 640 4M163 0c-23 141-17 288 4 430M433 0c19 147 13 294-5 430"/>
+              </g>
+              <path d="M438 199 Q371 91 301 129 T199 248" fill="none" stroke="url(#hero-route)" stroke-width="1.4" stroke-dasharray="4 7" opacity=".8"/>
+              <path d="M438 199 Q371 91 301 129 T199 248" fill="none" stroke="#c8ff59" stroke-width=".6" opacity=".24"/>
+              <g class="map-pin">
+                <circle cx="438" cy="199" r="12" fill="#5ce1d0" fill-opacity=".08"/><circle cx="438" cy="199" r="4" fill="#5ce1d0"/><circle class="signal-pulse" cx="438" cy="199" r="8" fill="none" stroke="#5ce1d0" stroke-opacity=".65"/>
+                <circle cx="199" cy="248" r="13" fill="#c8ff59" fill-opacity=".08"/><circle cx="199" cy="248" r="4" fill="#c8ff59"/><circle class="signal-pulse" cx="199" cy="248" r="8" fill="none" stroke="#c8ff59" stroke-opacity=".65"/>
+              </g>
+              <g fill="#d7e4d9" font-family="monospace" font-size="8" letter-spacing="1.1"><text x="450" y="195">ROTTERDAM</text><text x="450" y="207" fill="#829e98">RTM · EUROPE</text><text x="157" y="240">SINGAPORE</text><text x="157" y="252" fill="#829e98">SIN · ASIA PACIFIC</text></g>
+            </svg>
+            <div class="map-topline"><span class="eyebrow">Corridor view / 001</span><span class="map-clock">SCHEMATIC · NOT LIVE</span></div>
+            <div class="orbit-card glass float-slow">
+              <small>Mode in focus</small><strong>Ocean / planned</strong><span>Hand-offs in view</span>
+            </div>
+            <div class="map-caption">
+              <div><strong>Singapore <span aria-hidden="true">→</span> Rotterdam</strong><span>SIN / RTM &nbsp;·&nbsp; SAMPLE CORRIDOR</span></div>
+              <div class="map-route-meta"><b>01 ROUTE</b><span>Illustrative only</span></div>
+            </div>
+          </div>
+          <div class="hero-side-note"><span>Connected across modes</span><span>Illustrative map data</span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker-strip" aria-label="Example freight corridors">
+      <div class="shell ticker-inner">
+        <span class="ticker-label">Corridors in view<br />Illustrative only</span>
+        <div class="ticker-point"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="6.5" stroke="currentColor"/><circle cx="10" cy="10" r="2" fill="currentColor"/></svg><span>Singapore<small>SIN · ASIA PACIFIC</small></span></div>
+        <div class="ticker-point"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="6.5" stroke="currentColor"/><circle cx="10" cy="10" r="2" fill="currentColor"/></svg><span>Dubai<small>DXB · MIDDLE EAST</small></span></div>
+        <div class="ticker-point"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="6.5" stroke="currentColor"/><circle cx="10" cy="10" r="2" fill="currentColor"/></svg><span>Rotterdam<small>RTM · EUROPE</small></span></div>
+        <div class="ticker-point"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="6.5" stroke="currentColor"/><circle cx="10" cy="10" r="2" fill="currentColor"/></svg><span>Chicago<small>CHI · NORTH AMERICA</small></span></div>
+      </div>
+    </div>
+
+    <section class="section services-section" id="services" aria-labelledby="services-title">
+      <div class="shell">
+        <div class="section-header reveal">
+          <div><span class="eyebrow">01 / Choose your motion</span><h2 id="services-title">The right route<br />isn't always a straight line.</h2></div>
+          <p>Different cargo. Different clocks. We bring the trade-offs into view, then coordinate a mode—or a mix—that fits the move.</p>
+        </div>
+        <div class="service-grid">
+          {services.map((service) => (
+            <article class:list={['service-card', 'glass', service.accent, 'reveal']}>
+              <div class="service-index"><span>{service.index} / MODE</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d={service.symbol} stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <h3>{service.name}</h3>
+              <p class="tagline">{service.tagline}</p>
+              <p>{service.description}</p>
+              <div class="detail">{service.detail}</div>
+            </article>
+          ))}
+        </div>
+        <p class="section-footnote">Capabilities shown as planning options. Availability, transit, and service scope depend on lane and shipment details.</p>
+      </div>
+    </section>
+
+    <section class="section network-section" id="network" aria-labelledby="network-title">
+      <div class="shell">
+        <div class="section-header reveal">
+          <div><span class="eyebrow">02 / Connected movement</span><h2 id="network-title">One shipment.<br />A clearer chain of custody.</h2></div>
+          <p>See the shape of a hand-off before the hand-off happens. This animated route is a local illustration of coordinated movement—not live vehicle telemetry.</p>
+        </div>
+        <div class="network-stage glass reveal" id="route-stage" tabindex="0" aria-label="Illustrative route animation. Hover or focus to accelerate the vehicle marker.">
+          <div class="network-meta"><span>Route study / SIN → DXB</span><span>Local SVG demonstration · No live data</span></div>
+          <svg viewBox="0 0 1000 360" role="img" aria-labelledby="route-title route-desc" preserveAspectRatio="none">
+            <title id="route-title">Illustrative Singapore to Dubai freight route</title>
+            <desc id="route-desc">An animated vehicle marker moves along a curved route between two sample hubs. Hover or focus to accelerate it.</desc>
+            <defs>
+              <linearGradient id="route-stroke" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#5ce1d0" stop-opacity=".52"/><stop offset=".54" stop-color="#c8ff59" stop-opacity=".91"/><stop offset="1" stop-color="#5ce1d0" stop-opacity=".52"/></linearGradient>
+            </defs>
+            <path d="M97 222 C246 89 378 292 521 184 S746 87 887 144" fill="none" stroke="#375653" stroke-width="1.1"/>
+            <path class="route-dash" d="M97 222 C246 89 378 292 521 184 S746 87 887 144" fill="none" stroke="url(#route-stroke)" stroke-width="1.7"/>
+            <circle cx="97" cy="222" r="5" fill="#c8ff59"/><circle cx="97" cy="222" r="14" fill="none" stroke="#c8ff59" stroke-opacity=".3"/>
+            <circle cx="887" cy="144" r="5" fill="#5ce1d0"/><circle cx="887" cy="144" r="14" fill="none" stroke="#5ce1d0" stroke-opacity=".3"/>
+            <path d="M296 92v171M632 91v153" stroke="#72908a" stroke-opacity=".16" stroke-dasharray="2 7"/>
+            <g fill="#78958e" font-family="monospace" font-size="8"><text x="248" y="83">HAND-OFF WINDOW</text><text x="584" y="83">TRANSIT MILESTONE</text></g>
+            <path id="truck-path" d="M97 222 C246 89 378 292 521 184 S746 87 887 144" fill="none" stroke="transparent" stroke-width="1"/>
+            <g id="truck-marker" class="truck-mark" aria-hidden="true" transform="translate(80 209)">
+              <path d="M2 4h23v14H2z" fill="#c8ff59" stroke="#e4ffac" stroke-width=".8"/>
+              <path d="M25 9h8l5 5v4H25V9Z" fill="#d6ecae" stroke="#e4ffac" stroke-width=".8"/>
+              <path d="M29 10v4h6l-4-4h-2Z" fill="#263933"/>
+              <circle cx="10" cy="20" r="3" fill="#091114" stroke="#a9c58c"/><circle cx="31" cy="20" r="3" fill="#091114" stroke="#a9c58c"/>
+              <path d="M1 7h-5" stroke="#5ce1d0" stroke-width="1.2" stroke-linecap="round"/>
+            </g>
+          </svg>
+          <div class="network-point point-a"><span class="dot"></span><span><strong>Singapore</strong><small>SIN · ORIGIN</small></span></div>
+          <div class="network-point point-b"><span class="dot cyan"></span><span><strong>Dubai</strong><small>DXB · EXAMPLE HUB</small></span></div>
+          <div class="network-point point-c"><span class="dot cyan"></span><span><strong>Handoff</strong><small>COORDINATED MILESTONE</small></span></div>
+          <div class="network-bottom"><p>Hover or focus the route to accelerate the vehicle marker. Motion pauses when this panel leaves view or the browser tab is hidden.</p><div class="speed-readout" id="route-speed">40 km/h · demo<small>Illustrative animation pace</small></div></div>
+        </div>
+        <div class="network-legend"><span>Origin hub</span><span>Connection point</span><span>Illustrative route</span></div>
+      </div>
+    </section>
+
+    <section class="section estimate-section" id="estimator" aria-labelledby="estimate-title">
+      <div class="shell estimator-layout">
+        <div class="estimate-intro reveal">
+          <span class="eyebrow">03 / Start with the numbers</span>
+          <h2 id="estimate-title">A useful first estimate.</h2>
+          <p>Compare indicative freight cost and transit windows across three modes. Adjust the inputs to get a planning baseline for a sample lane.</p>
+          <p class="section-footnote">Illustrative estimate only. Not an offer, confirmed rate, or booking.</p>
+        </div>
+        <form class="calculator glass reveal" id="estimate-form" novalidate>
+          <div class="calculator-top"><strong>Lane estimator</strong><span>Sample rates · USD</span></div>
+          <div class="calc-fields">
+            <label><span class="form-label">Origin</span>
+              <select name="origin" id="estimate-origin" required>
+                {rates.locations.map((location) => <option value={location.id} selected={location.id === 'singapore'}>{location.name} · {location.code}</option>)}
+              </select>
+            </label>
+            <label><span class="form-label">Destination</span>
+              <select name="destination" id="estimate-destination" required>
+                {rates.locations.map((location) => <option value={location.id} selected={location.id === 'rotterdam'}>{location.name} · {location.code}</option>)}
+              </select>
+            </label>
+            <label><span class="form-label">Cargo weight (kg)</span>
+              <input type="number" inputmode="decimal" name="weight" id="estimate-weight" value="750" min={rates.minimumKg} max={rates.maximumKg} step="any" required aria-describedby="weight-help" />
+            </label>
+          </div>
+          <fieldset class="mode-field">
+            <legend class="form-label">Transport mode</legend>
+            <div class="mode-choice-row">
+              <label class="mode-choice"><input type="radio" name="mode" value="air" checked /><span>Air<small>Fastest lane</small></span></label>
+              <label class="mode-choice"><input type="radio" name="mode" value="ocean" /><span>Ocean<small>More capacity</small></span></label>
+              <label class="mode-choice"><input type="radio" name="mode" value="rail" /><span>Rail<small>Balanced pace</small></span></label>
+            </div>
+          </fieldset>
+          <div class="estimate-actions">
+            <button class="button-primary focus-ring" type="submit">Calculate estimate <span aria-hidden="true">→</span></button>
+            <span class="mono" style="font-size:8px;color:hsl(var(--muted))">Rates configured locally</span>
+          </div>
+          <div class="estimate-error" id="weight-help" aria-live="polite"></div>
+          <div class="estimate-result" id="estimate-result" aria-live="polite" aria-atomic="true">
+            <div class="price"><small>Illustrative freight cost</small><strong id="estimate-cost">—</strong></div>
+            <div><small>Transit window</small><strong id="estimate-days">—</strong></div>
+            <div><small>Selected mode</small><strong id="estimate-mode">—</strong></div>
+          </div>
+          <p class="estimate-note">Model uses local sample rates, lane factors, and planning ranges only. Excludes duties, surcharges, insurance, and handling. Final pricing requires shipment details and confirmation.</p>
+        </form>
+      </div>
+    </section>
+
+    <section class="section approach-section" id="approach" aria-labelledby="approach-title">
+      <div class="shell approach-layout">
+        <div class="approach-title reveal">
+          <span class="eyebrow">04 / Calm in the complexity</span>
+          <h2 id="approach-title">Visibility that helps you decide.</h2>
+          <p>Freight is a chain of decisions, not a dot on a map. Better coordination means fewer surprises—and better options when plans change.</p>
+          <a class="btn button-quiet focus-ring" href="#tracking">Try the demo lookup <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="principles reveal">
+          <article class="principle"><span class="principle-index">01</span><div><h3>Milestones, not mystery</h3><p>Make hand-offs and shipment status easier to understand, so teams can plan around what happens next.</p></div><span class="principle-mark" aria-hidden="true">↗</span></article>
+          <article class="principle"><span class="principle-index">02</span><div><h3>Options with context</h3><p>Balance speed, capacity, and cost with the trade-offs visible before a route is chosen.</p></div><span class="principle-mark" aria-hidden="true">↗</span></article>
+          <article class="principle"><span class="principle-index">03</span><div><h3>One connected plan</h3><p>Keep air, ocean, rail, and the links between them in the same operational conversation.</p></div><span class="principle-mark" aria-hidden="true">↗</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-section" aria-labelledby="faq-title">
+      <div class="shell faq-layout">
+        <div class="reveal"><span class="eyebrow">A few useful details</span><h2 id="faq-title">Before the first move.</h2><p>Clear expectations make for better freight decisions. Here's what this experience can—and can't—tell you.</p></div>
+        <div class="faq-list reveal">
+          <details><summary>Are the shipment updates real?</summary><p>No. The shipment IDs and milestone information are local sample data for demonstration only. This page does not connect to a carrier or provide live tracking.</p></details>
+          <details><summary>How should I read the cost and transit estimate?</summary><p>As a planning illustration, not a quote. The estimator uses editable local sample rates and lane factors. Actual rates and transit depend on shipment dimensions, service, schedules, surcharges, and other details.</p></details>
+          <details><summary>Can I compare different transport modes?</summary><p>Yes. Enter the same lane and weight, then choose air, ocean, or rail to compare the sample cost and indicative transit window.</p></details>
+          <details><summary>Does using the estimator book a shipment?</summary><p>No. The estimator only calculates a local demonstration. No shipment is reserved, booked, or sent to a third party.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing-cta" id="contact" aria-labelledby="closing-title">
+      <div class="shell closing-inner reveal">
+        <div><span class="eyebrow">The next move starts with a clearer view</span><h2 id="closing-title">Let's make your next move <em>make sense.</em></h2></div>
+        <a class="btn button-primary focus-ring" href="#estimator">Build a lane estimate <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <a class="brand focus-ring" href="#top" aria-label="AeroPulse Logistics, back to top">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 34 34" fill="none"><path d="M5 21.8 17 5l12 16.8h-8.2L17 16l-3.8 5.8H5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 27h16" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="17" cy="27" r="1.5" fill="currentColor"/></svg></span>
+        <span class="brand-copy"><strong>AEROPULSE</strong><small>LOGISTICS / GLOBAL FREIGHT</small></span>
+      </a>
+      <span class="footer-note">Static experience · Local demo data only<br />© <span id="year"></span> AeroPulse Logistics</span>
+      <nav class="footer-links" aria-label="Footer navigation"><a href="#services">Capabilities</a><a href="#network">Network</a><a href="#estimator">Estimate</a><a href="#top">Back to top ↑</a></nav>
+    </div>
+  </footer>
+  <script>
+    const pageData = document.querySelector('#top');
+    const shipments = JSON.parse(pageData?.dataset.shipments || '[]');
+    const rates = JSON.parse(pageData?.dataset.rates || '{}');
+
+    const menuButton = document.querySelector('.menu-toggle');
+    const mobileNavigation = document.querySelector('#mobile-navigation');
+    menuButton?.addEventListener('click', () => {
+      const expanded = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!expanded));
+      menuButton.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
+      mobileNavigation.hidden = expanded;
+    });
+    mobileNavigation?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+      mobileNavigation.hidden = true;
+      menuButton?.setAttribute('aria-expanded', 'false');
+      menuButton?.setAttribute('aria-label', 'Open navigation');
+    }));
+
+    const trackForm = document.querySelector('#track-form');
+    const trackInput = document.querySelector('#tracking-id');
+    const trackResult = document.querySelector('#track-result');
+    const findShipment = (event) => {
+      event?.preventDefault();
+      const id = trackInput.value.trim().toUpperCase();
+      trackResult.className = 'track-result is-shown';
+      if (!id) {
+        trackResult.classList.add('error');
+        trackResult.textContent = 'Enter a sample shipment ID to look it up.';
+        trackInput.focus();
+        return;
+      }
+      const shipment = shipments.find((item) => item.id.toUpperCase() === id);
+      if (!shipment) {
+        trackResult.classList.add('error');
+        trackResult.textContent = `No local demo shipment matches “${id}”. Try one of the sample IDs above. This lookup is not connected to live tracking.`;
+        return;
+      }
+      trackResult.classList.remove('error');
+      trackResult.innerHTML = `
+        <div class="result-top"><strong>${shipment.id}</strong><span class="result-status">${shipment.status}</span></div>
+        <div class="result-route"><div><strong>${shipment.origin.city}</strong><small>${shipment.origin.code} · ORIGIN</small></div><span class="route-line" aria-hidden="true"></span><div style="text-align:right"><strong>${shipment.destination.city}</strong><small>${shipment.destination.code} · DESTINATION</small></div></div>
+        <div class="progress-line" role="progressbar" aria-label="Illustrative shipment progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${shipment.progress}"><span style="width:${shipment.progress}%"></span></div>
+        <div class="result-bottom"><span>${shipment.mode} · ${shipment.milestone}</span><span>ETA ${shipment.eta}</span></div>
+        <div class="result-bottom" style="margin-top:8px"><span>${shipment.reference}</span><span>${shipment.updated}</span></div>
+      `;
+    };
+    trackForm?.addEventListener('submit', findShipment);
+    document.querySelectorAll('.sample-id').forEach((button) => button.addEventListener('click', () => {
+      trackInput.value = button.dataset.id || '';
+      findShipment();
+    }));
+
+    const estimateForm = document.querySelector('#estimate-form');
+    const estimateError = document.querySelector('#weight-help');
+    const estimateResult = document.querySelector('#estimate-result');
+    const originSelect = document.querySelector('#estimate-origin');
+    const destinationSelect = document.querySelector('#estimate-destination');
+    const weightInput = document.querySelector('#estimate-weight');
+    const currency = new Intl.NumberFormat('en-US', { style: 'currency', currency: rates.currency || 'USD', maximumFractionDigits: 0 });
+    estimateForm?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      estimateError.textContent = '';
+      estimateResult.classList.remove('is-shown');
+      const weight = Number(weightInput.value);
+      if (!weightInput.value || !Number.isFinite(weight) || weight < rates.minimumKg || weight > rates.maximumKg) {
+        estimateError.textContent = `Enter a cargo weight from ${rates.minimumKg.toLocaleString()} to ${rates.maximumKg.toLocaleString()} kg.`;
+        weightInput.setAttribute('aria-invalid', 'true');
+        weightInput.focus();
+        return;
+      }
+      weightInput.removeAttribute('aria-invalid');
+      const origin = rates.locations.find((location) => location.id === originSelect.value);
+      const destination = rates.locations.find((location) => location.id === destinationSelect.value);
+      if (!origin || !destination) {
+        estimateError.textContent = 'Choose both an origin and destination.';
+        return;
+      }
+      if (origin.id === destination.id) {
+        estimateError.textContent = 'Choose two different locations to estimate a lane.';
+        destinationSelect.focus();
+        return;
+      }
+      const modeKey = estimateForm.querySelector('input[name="mode"]:checked')?.value || 'air';
+      const mode = rates.modes[modeKey];
+      const laneFactor = (origin.factor + destination.factor) / 2;
+      const total = Math.round((mode.baseFee + weight * mode.ratePerKg) * laneFactor);
+      document.querySelector('#estimate-cost').textContent = currency.format(total);
+      document.querySelector('#estimate-days').textContent = `${mode.days[0]}–${mode.days[1]} days`;
+      document.querySelector('#estimate-mode').textContent = mode.name;
+      estimateResult.classList.add('is-shown');
+    });
+    weightInput?.addEventListener('input', () => {
+      weightInput.removeAttribute('aria-invalid');
+      estimateError.textContent = '';
+    });
+
+    const revealElements = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const revealObserver = new IntersectionObserver((entries, observer) => entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      }), { threshold: 0.12 });
+      revealElements.forEach((element) => revealObserver.observe(element));
+    } else {
+      revealElements.forEach((element) => element.classList.add('is-visible'));
+    }
+
+    const stage = document.querySelector('#route-stage');
+    const path = document.querySelector('#truck-path');
+    const truck = document.querySelector('#truck-marker');
+    const speedReadout = document.querySelector('#route-speed');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let routeVisible = false;
+    let hovered = false;
+    let progress = 0.08;
+    let frame = 0;
+    let lastFrame = 0;
+    const routeLength = path?.getTotalLength() || 0;
+    const drawTruck = () => {
+      if (!routeLength || !truck) return;
+      const distance = progress * routeLength;
+      const current = path.getPointAtLength(distance);
+      const ahead = path.getPointAtLength(Math.min(distance + 2, routeLength));
+      const angle = Math.atan2(ahead.y - current.y, ahead.x - current.x) * 180 / Math.PI;
+      truck.setAttribute('transform', `translate(${current.x - 18} ${current.y - 12}) rotate(${angle} 18 12)`);
+    };
+    const animateRoute = (time) => {
+      if (!routeVisible || document.hidden || reducedMotion) { frame = 0; return; }
+      if (lastFrame) {
+        const delta = Math.min(time - lastFrame, 40);
+        progress = (progress + delta / (hovered ? 10000 : 23000)) % 1;
+        drawTruck();
+      }
+      lastFrame = time;
+      frame = requestAnimationFrame(animateRoute);
+    };
+    const updateAnimation = () => {
+      const active = routeVisible && !document.hidden && !reducedMotion;
+      stage?.classList.toggle('is-running', active);
+      if (active && !frame) frame = requestAnimationFrame(animateRoute);
+      if (!active && frame) {
+        cancelAnimationFrame(frame);
+        frame = 0;
+        lastFrame = 0;
+      }
+    };
+    if (stage && path && truck) {
+      drawTruck();
+      if ('IntersectionObserver' in window) {
+        const routeObserver = new IntersectionObserver(([entry]) => {
+          routeVisible = entry.isIntersecting;
+          updateAnimation();
+        }, { threshold: 0.12 });
+        routeObserver.observe(stage);
+      } else {
+        routeVisible = true;
+        updateAnimation();
+      }
+      stage.addEventListener('pointerenter', () => {
+        hovered = true;
+        stage.classList.add('is-hovered');
+        speedReadout.firstChild.textContent = '120 km/h · demo';
+      });
+      stage.addEventListener('pointerleave', () => {
+        hovered = false;
+        stage.classList.remove('is-hovered');
+        speedReadout.firstChild.textContent = '40 km/h · demo';
+      });
+      stage.addEventListener('focusin', () => {
+        hovered = true;
+        speedReadout.firstChild.textContent = '120 km/h · demo';
+      });
+      stage.addEventListener('focusout', () => {
+        hovered = false;
+        speedReadout.firstChild.textContent = '40 km/h · demo';
+      });
+      document.addEventListener('visibilitychange', updateAnimation);
+    }
+
+    document.querySelector('#year').textContent = String(new Date().getFullYear());
+  </script>
+</BaseLayout>

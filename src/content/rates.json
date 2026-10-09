@@ -1,0 +1,17 @@
+{
+  "currency": "USD",
+  "minimumKg": 1,
+  "maximumKg": 10000,
+  "modes": {
+    "air": { "name": "Air freight", "ratePerKg": 5.8, "baseFee": 145, "days": [2, 5] },
+    "ocean": { "name": "Ocean freight", "ratePerKg": 0.92, "baseFee": 390, "days": [24, 38] },
+    "rail": { "name": "Rail freight", "ratePerKg": 2.35, "baseFee": 260, "days": [12, 19] }
+  },
+  "locations": [
+    { "id": "singapore", "name": "Singapore", "code": "SIN", "factor": 1.00 },
+    { "id": "rotterdam", "name": "Rotterdam", "code": "RTM", "factor": 1.14 },
+    { "id": "shanghai", "name": "Shanghai", "code": "SHA", "factor": 0.96 },
+    { "id": "chicago", "name": "Chicago", "code": "CHI", "factor": 1.21 },
+    { "id": "dubai", "name": "Dubai", "code": "DXB", "factor": 1.08 }
+  ]
+}

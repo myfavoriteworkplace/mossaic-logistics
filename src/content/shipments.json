@@ -1,0 +1,38 @@
+[
+  {
+    "id": "AP-8426-X3",
+    "mode": "Ocean",
+    "origin": { "city": "Singapore", "code": "SIN" },
+    "destination": { "city": "Rotterdam", "code": "RTM" },
+    "status": "On the move",
+    "progress": 68,
+    "milestone": "Vessel departed",
+    "updated": "Illustrative update · 14:32 UTC",
+    "eta": "08 Nov",
+    "reference": "Container · APZU 473 820-1"
+  },
+  {
+    "id": "AP-6719-R8",
+    "mode": "Air",
+    "origin": { "city": "Dubai", "code": "DXB" },
+    "destination": { "city": "Frankfurt", "code": "FRA" },
+    "status": "In transit",
+    "progress": 81,
+    "milestone": "Arrived at transit hub",
+    "updated": "Illustrative update · 09:18 UTC",
+    "eta": "22 Oct",
+    "reference": "Air waybill · 176-48392017"
+  },
+  {
+    "id": "AP-3954-M2",
+    "mode": "Rail",
+    "origin": { "city": "Shanghai", "code": "SHA" },
+    "destination": { "city": "Rotterdam", "code": "RTM" },
+    "status": "At origin",
+    "progress": 14,
+    "milestone": "Cargo received",
+    "updated": "Illustrative update · 06:45 UTC",
+    "eta": "02 Nov",
+    "reference": "Rail consignment · APRL 3954 02"
+  }
+]

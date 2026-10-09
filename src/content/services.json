@@ -1,0 +1,32 @@
+[
+  {
+    "id": "air",
+    "index": "01",
+    "name": "Air freight",
+    "tagline": "When the window is narrow.",
+    "description": "Priority lift, consolidated capacity, and clear handoffs from departure to final mile.",
+    "detail": "Express · Consolidated · Charter",
+    "accent": "cyan",
+    "symbol": "M3 18.5 22 12 3 5.5l3 6.5-3 6.5Zm3-6.5h16"
+  },
+  {
+    "id": "ocean",
+    "index": "02",
+    "name": "Ocean freight",
+    "tagline": "Room to move at scale.",
+    "description": "FCL and LCL options with planned connections and milestone visibility across the voyage.",
+    "detail": "FCL · LCL · Port-to-door",
+    "accent": "acid",
+    "symbol": "M3 10.5h18l-2 8H5l-2-8Zm3 0 2-5h8l2 5M8 22l2-3.5m6 3.5-2-3.5"
+  },
+  {
+    "id": "rail",
+    "index": "03",
+    "name": "Rail freight",
+    "tagline": "A steadier middle mile.",
+    "description": "A considered balance of lead time and cost across major intercontinental corridors.",
+    "detail": "Full container · Intermodal · Cross-border",
+    "accent": "amber",
+    "symbol": "M5 4h14a2 2 0 0 1 2 2v11H3V6a2 2 0 0 1 2-2Zm-2 9h18m-14 4 3 5m7-5-3 5M7 8h.01M17 8h.01"
+  }
+]
