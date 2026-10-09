@@ -33,12 +33,13 @@ Create a **New Static Site** in Render and connect the Git repository containing
 | Project / Environment | Optional; leave unselected if you do not use a Render project |
 | Branch | `main` |
 | Root Directory | Leave blank |
-| Build Command | `npm ci && npm run build` |
+| Build Command | `npm ci --registry=https://registry.npmjs.org && npm run build` |
 | Publish Directory | `dist` |
 
 ### Runtime and environment
 
 - Use Node.js **22.12.0 or newer** and npm **9.6.5 or newer**. If Render's build environment uses an older Node version, set the `NODE_VERSION` environment variable to `22.12.0`.
+- Dependencies are standard npm packages, and the committed lockfile must use public `https://registry.npmjs.org/` URLs. Do not commit lockfile URLs pointing to Replit's private package proxy.
 - No application environment variables or secrets are required for this static site.
 - No start command is required. Render serves the files generated in `dist/`.
 - No rewrite rules are required for the current single-page site.

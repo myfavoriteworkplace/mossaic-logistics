@@ -1,0 +1,1 @@
+- [NPM lockfile portability](npm-lockfile-portability.md) — audit resolved tarball URLs; a public registry flag does not repair private URLs already embedded in a lockfile.

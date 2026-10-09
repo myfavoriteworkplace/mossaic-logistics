@@ -192,3 +192,21 @@ Connect a Git-based headless CMS (e.g., Decap CMS or TinaCMS). Non-technical sta
 │ • Test automated rebuild workflows triggered by JSON file updates.     │
 │ • Perform final cross-browser and mobile responsiveness testing.       │
 └────────────────────────────────────────────────────────────────────────┘
+
+7. Cross-Platform Dependency & Deployment Portability Checklist
+The project must install and build on external hosts such as Render without depending on Replit-specific package services or runtime behavior.
+
+Dependency portability
+☐ Use standard packages published to the public npm registry; do not add Replit-only packages unless a feature explicitly requires Replit.
+☐ Inspect package.json and package-lock.json for Replit-specific dependencies, internal hostnames, and environment-specific configuration.
+☐ Ensure every package-lock.json "resolved" URL uses the public HTTPS npm registry (https://registry.npmjs.org/), never package-firewall.replit.internal or another private workspace proxy.
+☐ When adding or updating npm dependencies, use the public registry and review the lockfile before committing so proxy URLs are not reintroduced.
+☐ Keep node_modules and machine-specific caches out of Git; install from the committed package.json and package-lock.json with npm ci.
+
+External deployment verification
+☐ Confirm the documented Node.js and npm versions meet all dependency engine requirements.
+☐ On a clean external build environment, run npm ci --registry=https://registry.npmjs.org followed by npm run build.
+☐ Confirm the generated static output directory matches the selected host's publish directory.
+☐ Verify the build does not require Replit-only environment variables, filesystem paths, secrets, or internal network services.
+
+Current Render values: branch main; blank root directory; build command npm ci --registry=https://registry.npmjs.org && npm run build; publish directory dist. This is a static site and has no start command.
